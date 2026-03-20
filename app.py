@@ -1,4 +1,5 @@
 import os
+import logging
 import requests
 from flask import Flask, request, jsonify
 from flask_cors import CORS
@@ -13,6 +14,7 @@ def index():
 @app.route("/respondaai", methods=["POST"])
 def respondaai():
     key = os.environ.get("ANTHROPIC_KEY")
+    logging.warning(f"CHAVE LIDA: {'SIM' if key else 'NAO'} - Tamanho: {len(key) if key else 0}")
     data = request.get_json()
     mensagem = data.get("mensagem", "")
     contexto = data.get("contexto", "")
